@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Competition Generator</title>
+
+    <style>
+        html {
+            background: lightgrey;
+            scroll-behavior: smooth;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        header {
+            padding-bottom: 10px;
+            border-bottom: silver dotted 0.5px;
+        }
+
+        body {
+            background: white;
+            height: 100px auto;
+            width: auto;
+            text-align: center;
+            margin: 0 40px;
+            padding-bottom: 50px;
+        }
+
+        #generator {
+            padding: 20px 35px;
+            color: white;
+            background-color: darkolivegreen;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 15px;
+        }
+
+        #list {
+            text-align: left;
+            margin-left: 525px;
+            font-size: 1.3em;
+        }
+
+        #winner2 {
+            color: #4d392e;
+            font-size: 2em;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <img src="./images/boho.jpg" width="1200px" height="300px">
+    </header> 
+
+    <h1>Competition Winner Generator</h1>
+    
+    <div id="nameDiv">
+        <i>Name Entries: </i> &nbsp &nbsp &nbsp 
+        <input type="text" id="name"> 
+        <button type="submit" id="nameBtn">Enter</button>
+        <br>
+    </div>
+
+    <h2 id="winner1"></h2>
+    <h2 id="winner2"></h2>
+    
+    <div id="generateDiv">
+        <button id="generator">Generate Winner!</button>
+    </div>
+
+    <div class="listDiv">
+        <h2>Entrants List:</h2>
+        <p id="list"> </p>
+    </div>
+    
+    <script>
+        //Add the name to the Entrants list
+            nameArray = [];
+            var input = document.getElementById("nameBtn") ;
+
+            //Invoke the 'addName' function on button click
+            input.addEventListener('click', addName); 
+
+            //Invoke the 'addName' function on Enter keypress 
+            addEventListener("keyup", function(event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    event.preventDefault(); // Cancel the default action, if needed
+                    document.getElementById("nameBtn").click(); // Trigger the button element with a click
+                }
+            }); 
+
+            function addName() {
+                var entree = document.getElementById("name").value;
+                if (entree != "") {
+                    nameArray.push(entree);
+
+                    var text = "<ol>";
+                    for (i = 0; i < nameArray.length; i++) {
+                        text += "<li>" + nameArray[i] + "</li>";
+                        console.log(text);
+                    };
+                    text += "</ol>"
+
+                    document.getElementById("list").innerHTML = text;
+                    document.getElementById("name").value = "";
+                };
+            };
+
+        // Generate a random winner
+            document.getElementById("generator").onclick = function() {
+                
+                var num = Math.round(Math.random() * (nameArray.length -1));
+                var winner = nameArray[num];
+                document.getElementById("winner1").innerHTML = "The winner is:"; 
+                document.getElementById("winner2").innerHTML = winner + "!! <br> <br>";
+            };
+
+    </script>
+
+</body>
+</html>
